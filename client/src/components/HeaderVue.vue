@@ -42,7 +42,6 @@ import UIButton from '@components/UI/UIButton.vue';
     min-height: 75px;
     background-color: #fff;
     &__container {
-        font-family: 'Open Sans', sans-serif;
         display: flex;
         min-height: 75px;
         align-items: center;
@@ -70,7 +69,6 @@ import UIButton from '@components/UI/UIButton.vue';
         flex: 1 1 auto;
         align-items: center;
         gap: 1em;
-        font-weight: 500;
     }
     &__link {
         color: #000;
@@ -81,7 +79,7 @@ import UIButton from '@components/UI/UIButton.vue';
         }
     }
     &__button {
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Noto Sans', sans-serif;
         color: #fff;
         border-radius: .75em;
         border: 2px solid #4a47ff;
