@@ -122,9 +122,6 @@ const data = [
         justify-content: center;
         align-items: center;
         width: 33.333%;
-        &-text {
-
-        }
     }
 }
 
