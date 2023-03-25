@@ -8,6 +8,8 @@ const router = createRouter({
         {path: '/services', name: 'Services', component: () => import('@pages/ContactServicesPage.vue')},
         {path: '/login', name: 'Login', component: () => import('@pages/LoginPage.vue')},
         {path: '/register', name: 'Register', component: () => import('@pages/RegisterPage.vue')},
+        {path: '/profile', name: 'Profile', component: () => import('@pages/ProfilePage.vue')},
+        {path: '/news', name: 'News', component: () => import('@pages/NewsPage.vue')},
     ],
     history: createWebHashHistory()
 })

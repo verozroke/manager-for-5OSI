@@ -12,8 +12,6 @@
 </template>
 
 <script setup>
-import UIButton from '../components/UI/UIButton.vue';
-
 
 </script>
 
@@ -28,7 +26,8 @@ import UIButton from '../components/UI/UIButton.vue';
     background-size: cover;
     &__container {
         font-family: 'Open Sans', sans-serif;
-        height: 41em;
+        height: 100vh;
+        width: 100vh;
         display: flex;
         letter-spacing: 1px;
         flex-direction: column;
@@ -42,7 +41,7 @@ import UIButton from '../components/UI/UIButton.vue';
     }
     &__title {
         font-weight: 700;
-        font-size: 70px;
+        font-size: 68px;
         line-height: 1.2;
         margin-bottom: .5em;
         text-align: center;
@@ -53,9 +52,10 @@ import UIButton from '../components/UI/UIButton.vue';
         line-height: 1.2;
         font-size: 34px;
         margin-bottom: 1em;
-        text-align: justify;
+        text-align: center;
     }
     &__button {
+        cursor: pointer;
         font-family: 'Open Sans', sans-serif;
         color: #fff;
         border-radius: .75em;

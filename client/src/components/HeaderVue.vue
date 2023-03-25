@@ -22,13 +22,27 @@
                 </RouterLink>
             </ul>
             <!-- <button class="header__button">Войти</button> -->
-            <UIButton link="Home">Войти</UIButton>
+            <UIButton link="Login">Войти</UIButton>
+            <UIButton link="Register">Регистрация</UIButton>
         </div>
     </div>
 </template>
 
 <script setup>
 import UIButton from '@components/UI/UIButton.vue';
+import axios from 'axios';
+
+
+async function created() {
+    const response = await axios.post('http://localhost:3010/api/user/proposal', {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+    })
+    console.log(response)
+}
+
+created()
 
 
 </script>

@@ -12,8 +12,8 @@
                     <input name="name" id="name" placeholder="Введите ваше имя" v-model="userName" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="adress">Ваш адрес</label>
-                    <input name="adress" id="adress" placeholder="Город / Район / Улица / Дом / Номер кв." v-model="userAdress" type="text" class="form-control">
+                    <label for="adress">Город</label>
+                    <input name="adress" id="adress" placeholder="Выберите ваш город" v-model="userAdress" type="text" class="form-control">
                     <div class="address-example">Пример: Астана, Есиль, Туркестан, 30, 52</div>
                 </div>
                 <div class="form-group">
