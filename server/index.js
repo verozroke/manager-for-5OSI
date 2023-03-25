@@ -13,8 +13,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/uploads", express.static("uploads"));
-
 app.use("/api/user", userRouter);
 
 app.listen(process.env.PORT, () => {
