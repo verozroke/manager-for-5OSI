@@ -14,7 +14,8 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .button {
-    font-family: 'Noto Sans', sans-serif;
+
+    font-family: 'Open Sans', sans-serif;
     color: #fff;
     border-radius: .75em;
     border: 2px solid #4a47ff;

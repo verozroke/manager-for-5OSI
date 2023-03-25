@@ -4,9 +4,7 @@
             <div class="hero__container">
                 <div class="hero__title">Добро пожаловать!</div>
                 <div class="hero__subtitle">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium est, enim explicabo dolorem obcaecati vel voluptate. Quia impedit architecto facilis.</div>
-                <UIButton>
-                    Начать
-                </UIButton>
+                <div class="hero__button">Начать</div>
             </div>
         </div>
     </div>
@@ -28,15 +26,49 @@ import UIButton from '../components/UI/UIButton.vue';
     background-repeat: no-repeat;
     background-size: cover;
     &__container {
+        font-family: 'Open Sans', sans-serif;
         height: 41em;
         display: flex;
+        letter-spacing: 1px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        color: #fff;
     }
     &__overlay {
         backdrop-filter: blur(3px);
-        background-color: rgba($color: #000000, $alpha: 0.3);
+        background-color: rgba($color: #000000, $alpha: 0.5);
+    }
+    &__title {
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 1.2;
+        margin-bottom: .5em;
+        text-align: center;
+    }
+    &__subtitle {
+        font-weight: 300;
+        line-height: 1.2;
+        font-size: 40px;
+        margin-bottom: 1em;
+        text-align: center;
+    }
+    &__button {
+        font-family: 'Open Sans', sans-serif;
+        color: #fff;
+        border-radius: .75em;
+        border: 2px solid #4a47ff;
+        background-color: #4a47ff;
+        padding: .75em 1.5em;
+        letter-spacing: .5px;
+        font-size: 22px;
+        font-weight: 700;
+        transition: .4s;
+        &:hover {
+            transition: .4s;
+            background-color: #3b38c9;
+            border: 2px solid #3b38c9;
+        }
     }
 
 }
