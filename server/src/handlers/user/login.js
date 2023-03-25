@@ -29,6 +29,9 @@ const login = async (req, res) => {
     {
       id: user._id,
       login: user.login,
+      name: user.name,
+      city_id: user.city_id,
+      rescom_id: user.rescom_id
     },
     process.env.SECRET
   );

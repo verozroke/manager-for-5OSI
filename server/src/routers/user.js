@@ -7,6 +7,6 @@ const router = require("express").Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/proposal", verify, proposal)
+router.post("/proposal", [verify, proposal])
 
 module.exports = router;

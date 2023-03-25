@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema({
   id: {
     type: [mongoose.Types.ObjectId],
     ref: 'User',
-    required: true,
   },
   login: {
     type: String,
