@@ -19,8 +19,8 @@ const chatVyzyvalka = () => {
     width: 75px;
     background-color: #ff9600;
     z-index: 10000;
-    bottom: 1em;
-    right: 1em;
+    bottom: 2em;
+    right: 2em;
     border-radius: 50%;
     display: flex;
     justify-content: center;

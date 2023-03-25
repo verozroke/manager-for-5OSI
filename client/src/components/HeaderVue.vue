@@ -51,7 +51,7 @@ import UIButton from '@components/UI/UIButton.vue';
         gap: 2em;
     }
     &__logo-box {
-        color: #29abe2;
+        color: #4a47ff;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -61,10 +61,11 @@ import UIButton from '@components/UI/UIButton.vue';
         font-weight: 700;
     }
     &__logo {
-        height: 50px;
+        height: 60px;
         width: 41px;
         & img {
-            height: 50px;
+            padding-bottom: 10px;
+            height: 60px;
             width: 41px;
         }
     }

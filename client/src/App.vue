@@ -38,7 +38,7 @@ import BotMessageIcon from './components/UI/BotMessageIcon.vue';
 [class*="__container"] {
     max-width: 1200px;
     margin: 0 auto;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #000;
     font-weight: 400;
@@ -61,5 +61,32 @@ import BotMessageIcon from './components/UI/BotMessageIcon.vue';
     &-leave-active {
         transition: all .3s ease-in;
     }
+}
+
+body {
+	overflow: overlay;
+}
+
+
+::-webkit-scrollbar {
+	width: 13px;
+	
+	background-color: transparent;
+	&-track {
+		background-color: transparent;
+		margin-block: .5em;
+	}
+	&-thumb {
+		background-color: rgba(47, 47, 47, 0.836);
+		border-radius: 100vw;
+		transition: .4s;
+		border: 4px solid rgba(0, 0, 0, 0);
+		background-clip: padding-box;
+		&:hover {
+			background-color: rgb(28, 28, 28);
+			transition: .4s;
+		}
+	}
+	
 }
 </style>
