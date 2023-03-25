@@ -2,6 +2,7 @@
     <div class="proposal">
         <div class="proposal__container">
             <!-- TODO: Сделать валидацию -->
+            <!-- TODO: Убрать срочность -->
             <div class="proposal__title">Сделать заявку</div>
             <form action="" class="proposal__form">
                 <UISelect @typing-event="changeCategoryValue" optionName="Выберите категорию" :options="[{name: 'Сантехник'}, {name: 'Your mother'}, {name: 'Artem'}]"/>
