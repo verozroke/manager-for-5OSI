@@ -1,21 +1,31 @@
 <script setup>
 import HeaderVue from '@components/HeaderVue.vue'
+import FooterVue from './components/FooterVue.vue';
+import BotMessageIcon from './components/UI/BotMessageIcon.vue';
 
 </script>
 
 <template>
     <!-- Завертсать -->
     <div class="wrapper">
+        <BotMessageIcon/>
         <HeaderVue/>
-        <RouterView v-slot="{ Component }">
-            <transition name="route" mode="out-in">
-                <component :is="Component"></component>
-            </transition>
-        </RouterView>
+        <div class="main">
+            <RouterView v-slot="{ Component }">
+                <transition name="route" mode="out-in">
+                    <component :is="Component"></component>
+                </transition>
+            </RouterView>
+        </div>
+        <FooterVue/>
     </div>
 </template>
 
 <style lang="scss">
+
+.main {
+    flex: 1 1 auto;;
+}
 
 .wrapper {
     display: flex;

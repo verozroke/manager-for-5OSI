@@ -18,7 +18,7 @@
                     <li class="header__link">Контакты услуг</li>
                 </RouterLink>
                 <RouterLink :to="{name: 'Proposal'}">
-                    <li class="header__link">Сделать заявку</li>
+                    <li class="header__link">Отправить заявку</li>
                 </RouterLink>
             </ul>
             <!-- <button class="header__button">Войти</button> -->
@@ -37,6 +37,7 @@ import UIButton from '@components/UI/UIButton.vue';
 
 .header {
     position: sticky;
+    z-index: 9999;
     top: 0;
     width: 100%;
     min-height: 75px;

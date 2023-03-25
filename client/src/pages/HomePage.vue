@@ -3,7 +3,7 @@
         <div class="hero__overlay">
             <div class="hero__container">
                 <div class="hero__title">Добро пожаловать!</div>
-                <div class="hero__subtitle">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium est, enim explicabo dolorem obcaecati vel voluptate. Quia impedit architecto facilis.</div>
+                <div class="hero__subtitle">Добро пожаловать на сайт нашей компании, которая предоставляет квартирные услуги высочайшего качества! Мы специализируемся на ремонте и обслуживании сантехники, электрики, а также других видов услуг для вашей квартиры.</div>
                 <div class="hero__button">Начать</div>
             </div>
         </div>
@@ -47,11 +47,12 @@ import UIButton from '../components/UI/UIButton.vue';
         text-align: center;
     }
     &__subtitle {
+        width: 800px;
         font-weight: 300;
         line-height: 1.2;
-        font-size: 40px;
+        font-size: 34px;
         margin-bottom: 1em;
-        text-align: center;
+        text-align: justify;
     }
     &__button {
         font-family: 'Open Sans', sans-serif;
