@@ -5,10 +5,11 @@
     <div class="footer-left">
 
         <p class="footer-links">
-            <a class="link-1" href="#">Домой</a>
-            <a href="#">Контакты услуг</a>
-            <a href="#">Отправить заявку</a>
-            <a href="#">Авторизация</a>
+            <RouterLink style="color: #000" :to="{name: 'Home'}" class="link-1">Домой</RouterLink>
+            <RouterLink style="color: #000" :to="{name: 'Services'}" >Контакты услуг</RouterLink>
+            <RouterLink style="color: #000" :to="{name: 'Proposal'}" >Отправить заявку</RouterLink>
+            <RouterLink style="color: #000" :to="{name: 'News'}" >Лента новостей</RouterLink>
+            <RouterLink style="color: #000" :to="{name: 'Login'}" >Авторизация</RouterLink>
         </p>
 
         <p>Serve Corp. &copy; 2023</p>
@@ -64,7 +65,7 @@
   transition: .4s;
 }
 
-.footer-distributed p.footer-links a {
+.footer-distributed p.footer-links  {
   display: inline-block;
   line-height: 1.8;
   text-decoration: none;

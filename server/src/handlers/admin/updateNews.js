@@ -3,7 +3,7 @@ const Rescom = require('../../models/rescom')
 
 
 const updateNews = async (req, res) => {
-    const  rescomId  = parseInt(req.params.rescomId)
+    const rescomId  = parseInt(req.params.rescomId)
     const newObject = req.body; // new News that were sent by axios put and passed as params
     try {
         const rescom = await Rescom.findByIdAndUpdate(

@@ -12,9 +12,13 @@
                     <input name="name" id="name" placeholder="Введите ваше имя" v-model="userName" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="adress">Город</label>
+                    <UISelect @typing-event="changeUserCity" :optionName="'Выберите ваш город'" :options="[{name: 'Алматы'}, {name: 'Астана'}, {name: 'Омск'}]"/>
+                    <!-- <label for="adress">Город</label>
                     <input name="adress" id="adress" placeholder="Выберите ваш город" v-model="userAdress" type="text" class="form-control">
-                    <div class="address-example">Пример: Астана, Есиль, Туркестан, 30, 52</div>
+                    <div class="address-example">Пример: Астана, Есиль, Туркестан, 30, 52</div> -->
+                </div>
+                <div class="form-group" :class="[{'disabled': !userCity}]">
+                    <UISelect @typing-event="changeUserRescom" :disabled="!userCity" :optionName="'Выберите ваше ЖК'" :options="[{name: 'Караагаш'}, {name: 'Атамура'}, {name: 'Жасыл Ел'}]"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
@@ -25,21 +29,32 @@
                     <input name="passwordConfirm" id="passwordConfirm" autocomplete="on" placeholder="Подтверждение пароля" v-model="passwordConfirm" type="password" class="form-control">
                 </div>
                 <button type="submit" class="form-submit-btn">Зарегистрироваться</button>
+                <RouterLink :to="{name: 'Login'}" style="color: #5a5a5a6d; text-decoration: underline;">Вы уже зарегистрировались?</RouterLink>
             </form>
         </div>
     </div>
 </template>
 
 <script setup>
+import UISelect from '../components/UI/UISelect.vue';
 import axios from 'axios'
 import { ref } from 'vue';
 
 const userLogin = ref('')
 const userName = ref('')
-const userAdress = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
+const userCity = ref(null)
+const userRescom = ref(null)
 
+
+const changeUserCity = (e, value) => {
+    userCity.value = value
+}
+
+const changeUserRescom = (e, value) => {
+    userRescom.value = value
+}
 
 const handlerSubmit = () => {
     if(password.value !== passwordConfirm.value) {
@@ -47,8 +62,8 @@ const handlerSubmit = () => {
     }
     const dataSend = {
         login:  userLogin.value,
-        // name: userName.value,
-        // adress: userAdress.value,
+        name: userName.value,
+        adress: userAdress.value,
         password: password.value,
 
     }
@@ -93,6 +108,7 @@ const handlerSubmit = () => {
         width: 500px;
         gap: 1em;
         align-items: center;
+        margin: 0 0 4em 0;
     }
 }
 

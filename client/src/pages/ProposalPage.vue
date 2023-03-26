@@ -5,16 +5,17 @@
             <!-- TODO: Убрать срочность -->
             <div class="proposal__title">Сделать заявку</div>
             <form action="" class="proposal__form">
+                <label for="name">Название проблемы</label><input v-model="proposalName" name="name" placeholder="Введите название вашей проблемы" class="proposal__phone" type="text">
                 <UISelect @typing-event="changeCategoryValue" optionName="Выберите категорию" :options="[{name: 'Сантехник'}, {name: 'Your mother'}, {name: 'Artem'}]"/>
                 <label for="phone">Ваш номер</label><input v-model="mobilePhone" name="phone" placeholder="Введите ваш номер телефона" class="proposal__phone" type="tel">
-                <label class="proposal__radio-label">Срочность</label>
+                <!-- <label class="proposal__radio-label">Срочность</label>
                 <div class="proposal__radio">
                     <input name="picky-snicky" type="radio" id="yes" :value="true" v-model="isPicked">
                     <label style="font-weight: 400; font-size: 16px; color: #000;" for="yes">Срочно</label>
                     <br>
                     <input name="picky-snicky" type="radio" id="no" :value="false" v-model="isPicked">
                     <label style="font-weight: 400; font-size: 16px; color: #000;" for="no">Не срочно</label>
-                </div>
+                </div> -->
                 <label style="margin-top: 0.5em;" for="description">Описание проблемы</label>
                 <textarea v-model="textareaText" class="proposal__text" placeholder="Опишите своб проблему" name="description" id="description" cols="30" rows="10" style="resize: none"></textarea>
                 <button class="proposal__button" type="submit" @click.prevent="sendProposal">Отправить</button>
@@ -35,9 +36,9 @@ import UISelect from '../components/UI/UISelect.vue';
 import { ref } from 'vue';
 
 const categoryValue = ref(null)
-const isPicked = ref(false)
 const mobilePhone = ref('')
 const textareaText = ref('')
+const proposalName = ref('')
 
 // functions
 const changeCategoryValue = (e, value) => {
@@ -81,7 +82,7 @@ const sendProposal = () => {
         border-radius: .25em;
         padding: 1em 1em;
         background-color: #fff;
-        width: 600px;
+        width: 500px;
         border: 1px solid #000;
     }
     &__text {

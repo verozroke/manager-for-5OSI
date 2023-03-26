@@ -4,7 +4,6 @@ const proposalSchema = new mongoose.Schema({
     id: {
         type: [mongoose.Types.ObjectId],
         ref: 'Proposal',
-        required: true,
     },
     name: {
         type: String,

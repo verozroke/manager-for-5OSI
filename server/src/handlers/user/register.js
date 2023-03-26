@@ -20,8 +20,6 @@ const register = async (req, res) => {
       message: "User exists",
     });
   }
-  console.log(req.body.city_id)
-  console.log(req.body.rescom_id)
   const user = new User({
     login: req.body.login,
     password: hashedPassword,

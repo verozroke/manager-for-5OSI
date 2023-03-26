@@ -12,6 +12,7 @@
                     <input name="password" id="password" autocomplete="on" placeholder="Введите ваш пароль" v-model="password" type="password" class="form-control">
                 </div>
                 <button type="submit" class="form-submit-btn">Войти</button>
+                <RouterLink :to="{name: 'Register'}" style="color: #5a5a5a6d; text-decoration: underline;">Еще не зарегистрировались?</RouterLink>
             </form>
         </div>
   </div>

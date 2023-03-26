@@ -17,6 +17,9 @@
                 <RouterLink :to="{name: 'Services'}">
                     <li class="header__link">Контакты услуг</li>
                 </RouterLink>
+                <RouterLink :to="{name: 'News'}">
+                    <li class="header__link">Лента новостей</li>
+                </RouterLink>
                 <RouterLink :to="{name: 'Proposal'}">
                     <li class="header__link">Отправить заявку</li>
                 </RouterLink>
