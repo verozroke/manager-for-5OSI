@@ -4,7 +4,7 @@
             <div class="services__title">Контакты услуг</div>
             <div class="services__text">Мы не предоставляем квартирные услуги напрямую, но можем помочь вам связаться с государственными служащими, которые специализируются на ремонте и обслуживании квартир.
 <br><br>
-Наша компания предоставляет контактную информацию профессионалов, которые могут помочь вам с устранением любых проблем, связанных с сантехникой, электрикой, установкой и ремонтом бытовой техники, дверей и окон, а также с установкой и ремонтом кондиционеров.
+Наша компания предоставляет контактную информацию профессионалов и менеджеров, которые могут помочь вам с устранением любых проблем, связанных с сантехникой, электрикой, установкой и ремонтом бытовой техники, дверей и окон, а также с установкой и ремонтом кондиционеров.
 <br><br>
 Мы гарантируем, что наши партнеры обладают высоким уровнем опыта и мастерства и готовы помочь вам с решением любых проблем в кратчайшие сроки.
 <br><br>
@@ -31,7 +31,7 @@
                             <div class="services__text">{{ row.name }}</div>
                         </li>
                         <li class="services__element" style="border-left: 3px solid #c9c9c9a5; border-right: 3px solid #c9c9c9a5;">
-                            <div class="services__text">{{ row.phoneNumber }}</div>
+                            <div class="services__text">{{ row.phone_number }}</div>
                         </li>
                         <li class="services__element">
                             <div class="services__text">{{ row.schedule }}</div>
@@ -44,14 +44,38 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import axios from 'axios';
+import { ref } from 'vue';
+const router = useRouter()
+const data = ref([])
+
+
+let user = {}
+onMounted(async function() {
+        const response = await axios.get('http://localhost:3010/api/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        if(response.data.success !== undefined) {
+            router.push({name: 'Login'})
+        }
+        user = response.data
+        const contacts = await axios.get(`http://localhost:3010/api/rescom/contacts/${user.rescom_id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        data.value = contacts.data.contacts
+        
+})
 
 
 // just mockas
-const data = [
-    {name: 'Сантехник', phoneNumber: '87474461966', schedule: '7:00 - 8:00'},
-    {name: 'Вахтерша', phoneNumber: '87777777777', schedule: '5:00 - 10:00'},
-    {name: 'Охранник Боря', phoneNumber: '8696969696', schedule: '0:00 - 23:59'},
-]
 </script>
 
 <style lang="scss" scoped>

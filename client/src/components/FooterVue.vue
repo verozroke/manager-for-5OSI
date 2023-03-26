@@ -6,10 +6,12 @@
 
         <p class="footer-links">
             <RouterLink style="color: #000" :to="{name: 'Home'}" class="link-1">Домой</RouterLink>
-            <RouterLink style="color: #000" :to="{name: 'Services'}" >Контакты услуг</RouterLink>
-            <RouterLink style="color: #000" :to="{name: 'Proposal'}" >Отправить заявку</RouterLink>
-            <RouterLink style="color: #000" :to="{name: 'News'}" >Лента новостей</RouterLink>
-            <RouterLink style="color: #000" :to="{name: 'Login'}" >Авторизация</RouterLink>
+            <template v-if="isAuth">
+              <RouterLink style="color: #000" :to="{name: 'Services'}" >Контакты услуг</RouterLink>
+              <RouterLink style="color: #000" :to="{name: 'Proposal'}" >Отправить заявку</RouterLink>
+              <RouterLink style="color: #000" :to="{name: 'News'}" >Лента новостей</RouterLink>
+            </template>
+            <RouterLink v-if="!isAuth" style="color: #000" :to="{name: 'Login'}" >Авторизация</RouterLink>
         </p>
 
         <p>Serve Corp. &copy; 2023</p>
@@ -26,6 +28,23 @@
 </template>
 
 <script setup>
+import axios from 'axios';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
+const isAuth = ref(false)
+
+onMounted(async function() {
+        const response = await axios.get('http://localhost:3010/api/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        if(!(response.data.success !== undefined)) {
+            isAuth.value = true
+        }
+        
+})
 
 </script>
 

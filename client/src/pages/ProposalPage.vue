@@ -6,7 +6,7 @@
             <div class="proposal__title">Сделать заявку</div>
             <form action="" class="proposal__form">
                 <label for="name">Название проблемы</label><input v-model="proposalName" name="name" placeholder="Введите название вашей проблемы" class="proposal__phone" type="text">
-                <UISelect @typing-event="changeCategoryValue" optionName="Выберите категорию" :options="[{name: 'Сантехник'}, {name: 'Your mother'}, {name: 'Artem'}]"/>
+                <UISelect @typing-event="changeCategoryValue" optionName="Выберите категорию" :options="categories"/>
                 <label for="phone">Ваш номер</label><input v-model="mobilePhone" name="phone" placeholder="Введите ваш номер телефона" class="proposal__phone" type="tel">
                 <!-- <label class="proposal__radio-label">Срочность</label>
                 <div class="proposal__radio">
@@ -34,6 +34,37 @@
 <script setup>
 import UISelect from '../components/UI/UISelect.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import axios from 'axios';
+const router = useRouter()
+
+const categories = [
+    {name: 'Ремонтные службы'},
+    {name: 'Обслуживание систем отопления'},
+    {name: 'Обслуживание узлов водоснабжения'},
+    {name: 'Обслуживание санитарно-технических узлов'},
+    {name: 'Обслуживание электро-технического обеспечения'},
+    {name: 'Уборка придомовой территории'},
+    {name: 'Административные обязанности'},
+
+]
+
+
+let user = {}
+
+onMounted(async function() {
+        const response = await axios.get('http://localhost:3010/api/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        if(response.data.success !== undefined) {
+            router.push({name: 'Login'})
+        }
+        user = response.data
+})
 
 const categoryValue = ref(null)
 const mobilePhone = ref('')
@@ -45,9 +76,23 @@ const changeCategoryValue = (e, value) => {
     categoryValue.value = value
 }
 
-const sendProposal = () => {
-    // TODO: Помернять название атрибутов под ДБ
-    console.log(JSON.stringify({categoryValue: categoryValue.value, isPicked: isPicked.value, mobilePhone: mobilePhone.value, textareaText: textareaText.value}))
+const sendProposal = async () => {
+    const proposal = {
+        name: proposalName.value,
+        category: categoryValue.value.name,
+        description: textareaText.value,
+        currentStatus: 'В ожидании',
+        phoneNumber: mobilePhone.value,
+        user_id: user.id,
+        rescom_id: user.rescom_id[0],
+    }
+    const response = await axios.post('http://localhost:3010/api/user/proposal', proposal, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+    })
+    router.push({name: 'Profile'})
 }
 
 </script>

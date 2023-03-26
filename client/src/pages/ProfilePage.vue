@@ -7,12 +7,12 @@
             </div>
             <div class="profile__title">Ваши заявки:</div>
             <ul class="profile__proposals">
-                <li class="profile__proposal" :key="proposal.name" v-for="proposal in proposalList">
+                <li class="profile__proposal" :key="proposal.id" v-for="proposal in proposalList">
                     <ProposalPost 
                         :proposal-name="proposal.name" 
                         :category-name="proposal.category"
                         :proposal-description="proposal.description"
-                        :proposal-status="proposal.status"
+                        :proposal-status="proposal.currentStatus"
                     />
                 </li>
             </ul>
@@ -21,18 +21,54 @@
 </template>
   
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue';
 import ProposalPost from '../components/UI/ProposalPost.vue';
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import axios from 'axios';
+const router = useRouter()
+const userName = ref('')
+const userCity = ref('')
+const userRescom = ref('')
+const proposalList = ref([])
 
-const userName = ref('Петр')
-const userCity = ref('Астана')
-const userRescom = ref('Жасыл Ел')
-const proposalList = [
-    {name: 'Artem', category: 'Pidor', description: 'ryalno', status: 'Ebem'},
-    {name: 'Artem', category: 'Pidor', description: 'ryalno', status: 'Ebem'},
-    {name: 'Artem', category: 'Pidor', description: 'ryalno', status: 'Ebem'},
-]
+
+
+let user = {}
+
+onMounted(async function() {
+        const response = await axios.get('http://localhost:3010/api/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        if(response.data.success !== undefined) {
+            router.push({name: 'Login'})
+        }
+        user = response.data 
+        userName.value = user.name
+        const city = await axios.get(`http://localhost:3010/api/city/city/${user.city_id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        
+        userCity.value = city.data.name
+        const rescom = await axios.get(`http://localhost:3010/api/rescom/rescom/${user.rescom_id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        userRescom.value = rescom.data.name
+
+        const list = await axios.get(`http://localhost:3010/api/proposal/byUser/${user.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        proposalList.value = list.data
+})
 
 
 

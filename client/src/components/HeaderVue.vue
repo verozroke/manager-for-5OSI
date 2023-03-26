@@ -14,19 +14,26 @@
                 <!-- <RouterLink :to="{name: 'Rent'}">
                     <li class="header__link">Моя кварплата</li>
                 </RouterLink> -->
-                <RouterLink :to="{name: 'Services'}">
-                    <li class="header__link">Контакты услуг</li>
-                </RouterLink>
-                <RouterLink :to="{name: 'News'}">
-                    <li class="header__link">Лента новостей</li>
-                </RouterLink>
-                <RouterLink :to="{name: 'Proposal'}">
-                    <li class="header__link">Отправить заявку</li>
-                </RouterLink>
+                <template v-if="isAuth">
+                    <RouterLink :to="{name: 'Services'}">
+                        <li class="header__link">Контакты услуг</li>
+                    </RouterLink>
+                    <RouterLink :to="{name: 'News'}">
+                        <li class="header__link">Лента новостей</li>
+                    </RouterLink>
+                    <RouterLink :to="{name: 'Proposal'}">
+                        <li class="header__link">Отправить заявку</li>
+                    </RouterLink>
+                </template>
             </ul>
             <!-- <button class="header__button">Войти</button> -->
-            <UIButton link="Login">Войти</UIButton>
-            <UIButton link="Register">Регистрация</UIButton>
+            <template v-if="isAuth">
+                <UIButton link="Profile">Личный кабинет</UIButton>
+            </template>
+            <template v-else>
+                <UIButton link="Login">Войти</UIButton>
+                <UIButton link="Register">Регистрация</UIButton>
+            </template>
         </div>
     </div>
 </template>
@@ -34,18 +41,36 @@
 <script setup>
 import UIButton from '@components/UI/UIButton.vue';
 import axios from 'axios';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
 
 
-async function created() {
-    const response = await axios.post('http://localhost:3010/api/user/proposal', {
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+const isAuth = ref(false)
+
+onMounted(async function() {
+        const response = await axios.get('http://localhost:3010/api/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        if(!(response.data.success !== undefined)) {
+            isAuth.value = true
         }
-    })
-    console.log(response)
-}
+        
+})
 
-created()
+
+
+// async function created() {
+//     const response = await axios.post('http://localhost:3010/api/user/proposal', {
+//         headers: {
+//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
+//         }
+//     })
+//     console.log(response)
+// }
+
 
 
 </script>

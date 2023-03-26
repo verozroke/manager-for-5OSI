@@ -3,16 +3,32 @@
         <div class="hero__overlay">
             <div class="hero__container">
                 <div class="hero__title">Добро пожаловать!</div>
-                <!-- TODO: ПОМЕНЯТЬ НЕМНОГО ТЕКСТ -->
-                <div class="hero__subtitle">Добро пожаловать на сайт нашей компании, которая предоставляет квартирные услуги высочайшего качества! Мы специализируемся на ремонте и обслуживании сантехники, электрики, а также других видов услуг для вашей квартиры.</div>
-                <RouterLink :to="{name: 'Login'}" class="hero__button">Начать</RouterLink >
+                <div class="hero__subtitle">Добро пожаловать на сайт нашей компании, которая предоставляет квартирные услуги высочайшего качества!</div>
+                <RouterLink :to="isAuth ?  {name: 'Profile'} : {name: 'Login'}" class="hero__button">Начать</RouterLink >
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import axios from 'axios';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
 
+const isAuth = ref(false)
+
+onMounted(async function() {
+        const response = await axios.get('http://localhost:3010/api/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        if(!(response.data.success !== undefined)) {
+            isAuth.value = true
+        }
+        
+})
 </script>
 
 <style lang="scss" scoped>

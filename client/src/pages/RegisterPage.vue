@@ -12,13 +12,13 @@
                     <input name="name" id="name" placeholder="Введите ваше имя" v-model="userName" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <UISelect @typing-event="changeUserCity" :optionName="'Выберите ваш город'" :options="[{name: 'Алматы'}, {name: 'Астана'}, {name: 'Омск'}]"/>
+                    <UISelect @typing-event="changeUserCity" :optionName="'Выберите ваш город'" :options="cityOptions"/>
                     <!-- <label for="adress">Город</label>
                     <input name="adress" id="adress" placeholder="Выберите ваш город" v-model="userAdress" type="text" class="form-control">
                     <div class="address-example">Пример: Астана, Есиль, Туркестан, 30, 52</div> -->
                 </div>
                 <div class="form-group" :class="[{'disabled': !userCity}]">
-                    <UISelect @typing-event="changeUserRescom" :disabled="!userCity" :optionName="'Выберите ваше ЖК'" :options="[{name: 'Караагаш'}, {name: 'Атамура'}, {name: 'Жасыл Ел'}]"/>
+                    <UISelect @typing-event="changeUserRescom" :disabled="!userCity" :optionName="'Выберите ваше ЖК'" :options="rescomOptions"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
@@ -39,6 +39,10 @@
 import UISelect from '../components/UI/UISelect.vue';
 import axios from 'axios'
 import { ref } from 'vue';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 const userLogin = ref('')
 const userName = ref('')
@@ -46,6 +50,26 @@ const password = ref('')
 const passwordConfirm = ref('')
 const userCity = ref(null)
 const userRescom = ref(null)
+
+const cityOptions = ref([])
+const rescomOptions = ref([])
+
+onMounted(async function() {
+        const cities = await axios.get('http://localhost:3010/api/city/cities', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        cityOptions.value = cities.data
+        const rescoms = await axios.get('http://localhost:3010/api/rescom/rescoms/', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        rescomOptions.value = rescoms.data
+        console.log(rescomOptions.value, cityOptions.value)
+})
+
 
 
 const changeUserCity = (e, value) => {
@@ -60,12 +84,13 @@ const handlerSubmit = () => {
     if(password.value !== passwordConfirm.value) {
         return
     }
+    console.log(userCity._id, userRescom._id)
     const dataSend = {
-        login:  userLogin.value,
+        login: userLogin.value,
         name: userName.value,
-        adress: userAdress.value,
         password: password.value,
-
+        city_id: userCity._id,
+        rescom_id: userRescom._id
     }
     // axios.post('http://localhost:3010/api/user/register', data)
     //     .then(res => {
@@ -82,6 +107,7 @@ const handlerSubmit = () => {
         }).catch(err => {
             console.log(err)
         })
+    router.push({name: 'Login'})
 }
 
 </script>

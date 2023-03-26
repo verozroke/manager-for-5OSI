@@ -21,7 +21,8 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue';
-import router from '../routes';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 const userLogin = ref('')
 const password = ref('')
@@ -40,8 +41,9 @@ const handlerSubmit = async () => {
       }
     }).then((res) => {
         localStorage.setItem('token', res.data.token)
-        // router.push({path: '/'});
-        window.location.href = "/manager-for-5OSI/#/"
+        router.push({path: '/'});
+        // window.location.href = "/manager-for-5OSI/#/"
+        setTimeout("location.reload(true);", 0)
     })
   } catch(e) {
     console.log(e)
