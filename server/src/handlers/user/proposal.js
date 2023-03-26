@@ -16,7 +16,6 @@ const proposal = async (req, res) => {
         currentStatus: req.body.currentStatus,
         phoneNumber: req.body.phoneNumber,
         user_id: new ObjectId(req.body.user_id),
-        statusHistory: req.body.statusHistory,
         rescom_id: new ObjectId(req.body.rescom_id),
     });
     const saved = await prop.save();

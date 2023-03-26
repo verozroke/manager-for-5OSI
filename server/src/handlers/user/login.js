@@ -33,7 +33,7 @@ const login = async (req, res) => {
       city_id: user.city_id,
       rescom_id: user.rescom_id
     },
-    process.env.SECRET
+    process.env.SECRET, {expiresIn: "12h"}
   );
   return res.json({
     success: true,

@@ -30,10 +30,6 @@ const proposalSchema = new mongoose.Schema({
         ref: 'Proposal',
         required: true,
     },
-    statusHistory: {
-        type: Array,
-        required: true,
-    },
     rescom_id: {
         type: [mongoose.Types.ObjectId],
         ref: 'Proposal',
