@@ -4,7 +4,7 @@
             <div class="hero__container">
                 <div class="hero__title">Добро пожаловать!</div>
                 <div class="hero__subtitle">Добро пожаловать на сайт нашей компании, которая предоставляет квартирные услуги высочайшего качества!</div>
-                <RouterLink :to="isAuth ?  {name: 'Profile'} : {name: 'Login'}" class="hero__button">Начать</RouterLink >
+                <RouterLink :to="{name: 'Login'}" class="hero__button">Начать</RouterLink >
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@ import { ref } from 'vue';
 const isAuth = ref(false)
 
 onMounted(async function() {
-        const response = await axios.get('http://localhost:3010/api/user/', {
+        const response = await axios.get('http://localhost:3010/api/admin/', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),

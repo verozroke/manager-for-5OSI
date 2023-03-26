@@ -11,28 +11,19 @@
                 <RouterLink :to="{name: 'Home'}">
                     <li class="header__link">Домой</li>
                 </RouterLink>
+                <RouterLink :to="{name: 'Statistics'}">
+                    <li class="header__link">Заявки</li>
+                </RouterLink>
+                <RouterLink :to="{name: 'News'}">
+                    <li class="header__link">Сделать объявление</li>
+                </RouterLink>
                 <!-- <RouterLink :to="{name: 'Rent'}">
                     <li class="header__link">Моя кварплата</li>
                 </RouterLink> -->
-                <template v-if="isAuth">
-                    <RouterLink :to="{name: 'Services'}">
-                        <li class="header__link">Контакты услуг</li>
-                    </RouterLink>
-                    <RouterLink :to="{name: 'News'}">
-                        <li class="header__link">Лента новостей</li>
-                    </RouterLink>
-                    <RouterLink :to="{name: 'Proposal'}">
-                        <li class="header__link">Отправить заявку</li>
-                    </RouterLink>
-                </template>
             </ul>
             <!-- <button class="header__button">Войти</button> -->
-            <template v-if="isAuth">
-                <UIButton link="Profile">Личный кабинет</UIButton>
-            </template>
-            <template v-else>
-                <UIButton link="Login">Войти</UIButton>
-            </template>
+                <!-- <UIButton link="Statistics">Заявки</UIButton> -->
+                <UIButton v-if="!isAuth" link="Login">Войти</UIButton>
         </div>
     </div>
 </template>
@@ -47,7 +38,7 @@ import { ref } from 'vue';
 const isAuth = ref(false)
 
 onMounted(async function() {
-        const response = await axios.get('http://localhost:3010/api/user/', {
+        const response = await axios.get('http://localhost:3010/api/admin/', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),

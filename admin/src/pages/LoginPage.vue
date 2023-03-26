@@ -34,7 +34,7 @@ const handlerSubmit = async () => {
     password: password.value,
   }
   try {
-    axios.post('http://localhost:3010/api/user/login', body, {
+    axios.post('http://localhost:3010/api/admin/login', body, {
       headers: {
         'Content-Type': 'application/json'
       }

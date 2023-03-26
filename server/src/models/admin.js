@@ -11,11 +11,12 @@ const adminSchema = new mongoose.Schema({
         required: true,
     },
     password: {
-        type: Number,
+        type: String,
         required: true,
     },
     rescom_id: {
-        type: Number,
+        type: [mongoose.Types.ObjectId],
+        ref: 'Admin',
         required: true,
     },
 });
